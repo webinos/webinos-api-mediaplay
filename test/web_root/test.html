@@ -1,0 +1,217 @@
+<html>
+<head>
+    <title>PZP TestPage </title>
+    <link rel="stylesheet" href="../../css/index.css" type="text/css" media="screen"/>
+    <link href='http://fonts.googleapis.com/css?family=Ovo' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../../css/jquery.mobile-1.3.0.min.css" />
+    <script src="../../js/jquery-1.8.2.min.js"></script>
+    <script src="../../js/jquery.mobile-1.3.0.min.js"></script>
+    <script type="text/javascript" src="../../webinos.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function logMessage(msg) {
+                if (msg) {
+                    $('#message').append('<li>' + msg + '</li>');
+                }
+            }
+
+            function printInfo(data) {
+                logMessage(data.payload.message);
+            }
+
+            webinos.session.addListener('info', printInfo);
+
+            var test = {};
+            var recentService;
+
+            $('#findService').bind('click', function () {
+                test = {};
+                recentService = null;
+                $('#getMediaServices').empty();
+                webinos.discovery.findServices(new ServiceType('http://www.w3.org/ns/api-perms/media'),
+                        {onFound:function (service) {
+                            test[service.serviceAddress] = service;
+                            console.log(service);
+                            $('#getMediaServices').append($('<option>' + service.serviceAddress + '</option>'));
+                        }});
+            });
+            $('#bind').bind('click', function () {
+                recentService = test[$('#getMediaServices option:selected').val()];
+                recentService.bindService({onBind:function (service) {
+                    logMessage('TEST API ' + service.api + ' bound.');
+                }});
+            });
+            
+            $('#goleft').bind('click', function () {
+                recentService.left(function (result) {
+                            alert(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
+            
+             $('#goright').bind('click', function () {
+                recentService.right(function (result) {
+                            alert(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
+            
+             $('#goup').bind('click', function () {
+                recentService.up(function (result) {
+                            alert(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
+            
+             $('#godown').bind('click', function () {
+                recentService.down(function () {
+                        },
+                        function () {
+                        });
+            });
+            
+             $('#sendok').bind('click', function () {
+                recentService.click(function (result) {
+                            alert(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
+            
+            $('#back').bind('click', function () {
+                recentService.back(function (result) {
+                            alert(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
+            
+            $('#play').bind('click', function () {
+                recentService.play(function (result) {
+                            alert(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
+            
+            $('#pause').bind('click', function () {
+                recentService.pause(function (result) {
+                            alert(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
+            
+            $('#stepforward').bind('click', function () {
+                recentService.stepforward(function (result) {
+                            alert(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
+            
+            $('#stepback').bind('click', function () {
+                recentService.stepback(function (result) {
+                            alert(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
+            
+            $('#stop').bind('click', function () {
+                recentService.stop(function (result) {
+                            alert(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
+
+        });
+    </script>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Use "Find Services" to search for available get42-Services.<br/>
+            Select one, then bind and use. Select another and bind again and use.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="findService" class="button">Find Services</button>
+            <br/>
+            <select id="getMediaServices"></select>
+        </td>
+    </tr>
+    <tr>
+        <td><p>
+            <i> The selected address means the Service at that address
+                will be used.</i>
+        </p></td>
+    </tr>
+    <tr>
+        <td>
+            <button id="bind" class="button">Bind</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="goleft" class="button">LEFT</button>
+        </td>
+        <td>
+            <button id="goright" class="button">RIGHT</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="goup" class="button">UP</button>
+        </td>
+        <td>
+            <button id="godown" class="button">DOWN</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="sendok" class="button">OK</button>
+        </td>
+        <td>
+            <button id="back" class="button">BACK</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="play" class="button">PLAY</button>
+        </td>
+        <td>
+            <button id="pause" class="button">PAUSE</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="stepforward" class="button">FF</button>
+        </td>
+        <td>
+            <button id="stepback" class="button">BB</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="stop" class="button">STOP</button>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

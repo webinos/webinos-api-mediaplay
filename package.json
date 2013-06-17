@@ -1,0 +1,53 @@
+{
+  "name": "webinos-api-media",
+  "publishConfig": {
+    "tag": "alpha"
+  },
+  "description": "media API",
+  "keywords": [
+    "webinos",
+    "media",
+    "API"
+  ],
+  "version": "0.0.1",
+  "homepage": "http://developer.webinos.org/",
+  "author": {
+    "name": "Michele Morello",
+    "email": "morello@ismb.it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webinos/webinos-api-media.git"
+  },
+  "bugs": {
+    "email": "webinos-wp4-ml@fokus.fraunhofer.de",
+    "url": "http://jira.webinos.org"
+  },
+  "directories": {
+    "lib": "./lib",
+    "node_modules": "./node_modules",
+    "test": "./test"
+  },
+  "main": "./lib/service.js", 
+  "devDependencies":
+  { "webinos-jsonrpc2": "*",
+    "webinos-utilities": "git+https://github.com/webinos/webinos-utilities.git"
+  }, 
+  "dependencies":
+  {
+    "xbmc": "x.x.x"
+  },
+  "bundleDependencies":
+  [ "events", 
+    "fs",
+    "https",
+    "path", 
+    "url"
+  ],
+  "_id": "webinos-api-media@0.0.1",
+  "readme": "ERROR: No README.md file found!",
+  "dist": {
+    "shasum": "f67cc7e88d8b173cd99dff4e796ed889995f3d57"
+  },
+  "_from": "git+http://github.com/michelemorello/webinos-api-media.git"
+}
