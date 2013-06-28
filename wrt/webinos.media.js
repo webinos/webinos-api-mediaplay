@@ -20,17 +20,19 @@
 		this.base = WebinosService;
 		this.base(obj);
 		
-		this.left = left;
-		this.right = right;
-        this.up = up;
-        this.down = down;
-        this.click = click;
-        this.back = back;
         this.play = play;
-        this.pause = pause;
+        this.playPause = playPause;
         this.stepforward = stepforward;
         this.stepback = stepback;
+        this.bigStepforward = bigStepforward;
+        this.bigStepback = bigStepback;
         this.stop = stop;
+        this.volumeUP = volumeUP;
+        this.volumeDOWN = volumeDOWN;
+        this.increasePlaybackSpeed = increasePlaybackSpeed;
+        this.decreasePlaybackSpeed = decreasePlaybackSpeed;
+        this.showInfo = showInfo;
+        this.toggleSubtitle = toggleSubtitle;
     };
     
     Media.prototype = new WebinosService;
