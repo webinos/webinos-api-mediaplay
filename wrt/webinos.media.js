@@ -48,172 +48,175 @@
 	    };
     }
     
-     function left (successCB, errorCB)
-    {
-        var rpc =webinos.rpcHandler.createRPC(this, "left"); // RPCservicename,
-        //RPCservicename,
-        // function
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }    
-        
-        
-    function right (successCB, errorCB)
-    {
-       var rpc =webinos.rpcHandler.createRPC(this, "right"); // RPCservicename,
-        //RPCservicename,
-        // function
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    
-    function up (successCB, errorCB)
-    {
-        var rpc =webinos.rpcHandler.createRPC(this, "up"); // RPCservicename,
-        //RPCservicename,
-        // function
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    function down (successCB, errorCB)
-    {
-        var rpc =webinos.rpcHandler.createRPC(this, "down"); // RPCservicename,
-        //RPCservicename,
-        // function
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    
-    function click (successCB, errorCB)
-    {
-       var rpc =webinos.rpcHandler.createRPC(this, "click"); // RPCservicename,
-        //RPCservicename,
-        // function
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-        function back (successCB, errorCB)
-    {
-       var rpc =webinos.rpcHandler.createRPC(this, "back"); // RPCservicename,
-        //RPCservicename,
-        // function
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-        function play (successCB, errorCB)
-    {
-       var rpc =webinos.rpcHandler.createRPC(this, "play"); // RPCservicename,
-        //RPCservicename,
-        // function
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-        function pause (successCB, errorCB)
-    {
-       var rpc =webinos.rpcHandler.createRPC(this, "pause"); // RPCservicename,
-        //RPCservicename,
-        // function
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-        function stepforward (successCB, errorCB)
-    {
-       var rpc =webinos.rpcHandler.createRPC(this, "stepforward"); // RPCservicename,
-        //RPCservicename,
-        // function
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-        function stepback (successCB, errorCB)
-    {
-       var rpc =webinos.rpcHandler.createRPC(this, "stepback"); // RPCservicename,
-        //RPCservicename,
-        // function
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-        function stop (successCB, errorCB)
-    {
-       var rpc =webinos.rpcHandler.createRPC(this, "stop"); // RPCservicename,
-        //RPCservicename,
-        // function
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
 
+    
+    function play (path, successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "playvideo", [ path ]);
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function playPause (successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "playPause");
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function stepforward (successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "stepforward"); 
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function bigStepforward (successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "bigStepforward");
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function stepback (successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "stepback");
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function bigStepback (successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "bigStepback");
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function stop (successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "stop");
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function volumeUP (successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "volumeUP");
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function volumeDOWN (successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "volumeDOWN");
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function increasePlaybackSpeed (successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "increasePlaybackSpeed");
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function decreasePlaybackSpeed (successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "decreasePlaybackSpeed");
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function showInfo (successCB, errorCB)
+    {
+       var rpc =webinos.rpcHandler.createRPC(this, "showInfo");
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
+    function toggleSubtitle (successCB, errorCB)
+    {
+       var rpc = webinos.rpcHandler.createRPC(this, "toggleSubtitle");
+        webinos.rpcHandler.executeRPC(rpc, function(params)
+        {
+            successCB(params);
+        }, function(error)
+        {
+            if (typeof(errorCB) !== 'undefined')
+            errorCB(error);
+        })
+    }
+    
 }());

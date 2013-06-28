@@ -42,7 +42,7 @@
                 }});
             });
             $('#play').bind('click', function () {
-                recentService.playvideo($('#path').value, function (result) {
+                recentService.play($('#path').value, function (result) {
                             alert(result);
                         },
                         function (error) {
