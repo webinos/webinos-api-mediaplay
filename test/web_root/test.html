@@ -42,8 +42,9 @@
                 }});
             });
             $('#play').bind('click', function () {
-                recentService.play($('#path').value, function (result) {
-                            alert(result);
+                alert($('#path').val());
+                recentService.play($('#path').val(), function (result) {
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
@@ -52,7 +53,7 @@
             
             $('#pause').bind('click', function () {
                 recentService.playPause(function (result) {
-                            alert(result);
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
@@ -61,7 +62,7 @@
             
             $('#stepforward').bind('click', function () {
                 recentService.stepforward(function (result) {
-                            alert(result);
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
@@ -70,7 +71,7 @@
             
             $('#stepback').bind('click', function () {
                 recentService.stepback(function (result) {
-                            alert(result);
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
@@ -79,7 +80,7 @@
             
             $('#stop').bind('click', function () {
                 recentService.stop(function (result) {
-                            alert(result);
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
@@ -87,7 +88,7 @@
             });
             $('#volumeup').bind('click', function () {
                 recentService.volumeUP(function (result) {
-                            alert(result);
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
@@ -95,7 +96,7 @@
             });
             $('#volumedown').bind('click', function () {
                 recentService.volumeDOWN(function (result) {
-                            alert(result);
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
@@ -131,13 +132,11 @@
     </tr>
 </table>
 <table>
+    Insert path to movie:
+    <br/>
     <tr>
         <td>
-            Insert path to movie:
-            <br/>
-            <form action="demo_form.asp">
-                <input type="text" id="path"><br>
-            </form>
+            <input type="text" id="path"><br>
         </td>
         <td>
             <button id="play" class="button">PLAY</button>

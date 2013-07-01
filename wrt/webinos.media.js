@@ -19,32 +19,12 @@
     Media = function(obj) {
 		this.base = WebinosService;
 		this.base(obj);
-		
-        this.play = play;
-        this.playPause = playPause;
-        this.stepforward = stepforward;
-        this.stepback = stepback;
-        this.bigStepforward = bigStepforward;
-        this.bigStepback = bigStepback;
-        this.stop = stop;
-        this.volumeUP = volumeUP;
-        this.volumeDOWN = volumeDOWN;
-        this.increasePlaybackSpeed = increasePlaybackSpeed;
-        this.decreasePlaybackSpeed = decreasePlaybackSpeed;
-        this.showInfo = showInfo;
-        this.toggleSubtitle = toggleSubtitle;
     };
     
     Media.prototype = new WebinosService;
 
     Media.prototype.bindService = function (bindCB, serviceId) {
 	    // actually there should be an auth check here or whatever, but we just always bind
-	    this.left = left;
-		this.right = right;
-        this.up = up;
-        this.down = down;
-        this.click = click;
-
 	    if (typeof bindCB.onBind === 'function') {
 		    bindCB.onBind(this);
 	    };
@@ -52,7 +32,7 @@
     
 
     
-    function play (path, successCB, errorCB)
+    Media.prototype.play = function(path, successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "playvideo", [ path ]);
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -65,7 +45,7 @@
         })
     }
     
-    function playPause (successCB, errorCB)
+    Media.prototype.playPause = function(successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "playPause");
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -78,7 +58,7 @@
         })
     }
     
-    function stepforward (successCB, errorCB)
+    Media.prototype.stepforward = function(successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "stepforward"); 
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -91,7 +71,7 @@
         })
     }
     
-    function bigStepforward (successCB, errorCB)
+    Media.prototype.bigStepforward = function(successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "bigStepforward");
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -104,7 +84,7 @@
         })
     }
     
-    function stepback (successCB, errorCB)
+    Media.prototype.stepback = function(successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "stepback");
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -117,7 +97,7 @@
         })
     }
     
-    function bigStepback (successCB, errorCB)
+    Media.prototype.bigStepback = function(successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "bigStepback");
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -130,7 +110,7 @@
         })
     }
     
-    function stop (successCB, errorCB)
+    Media.prototype.stop = function(successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "stop");
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -143,7 +123,7 @@
         })
     }
     
-    function volumeUP (successCB, errorCB)
+    Media.prototype.volumeUP = function(successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "volumeUP");
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -156,7 +136,7 @@
         })
     }
     
-    function volumeDOWN (successCB, errorCB)
+    Media.prototype.volumeDOWN = function(successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "volumeDOWN");
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -169,7 +149,7 @@
         })
     }
     
-    function increasePlaybackSpeed (successCB, errorCB)
+    Media.prototype.increasePlaybackSpeed = function(successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "increasePlaybackSpeed");
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -182,7 +162,7 @@
         })
     }
     
-    function decreasePlaybackSpeed (successCB, errorCB)
+    Media.prototype.decreasePlaybackSpeed = function(successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "decreasePlaybackSpeed");
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -195,7 +175,7 @@
         })
     }
     
-    function showInfo (successCB, errorCB)
+    Media.prototype.showInfo = function(successCB, errorCB)
     {
        var rpc =webinos.rpcHandler.createRPC(this, "showInfo");
         webinos.rpcHandler.executeRPC(rpc, function(params)
@@ -208,7 +188,7 @@
         })
     }
     
-    function toggleSubtitle (successCB, errorCB)
+    Media.prototype.toggleSubtitle = function(successCB, errorCB)
     {
        var rpc = webinos.rpcHandler.createRPC(this, "toggleSubtitle");
         webinos.rpcHandler.executeRPC(rpc, function(params)
