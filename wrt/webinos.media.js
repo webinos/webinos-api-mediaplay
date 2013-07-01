@@ -17,11 +17,10 @@
 (function()
 {
     Media = function(obj) {
-		this.base = WebinosService;
-		this.base(obj);
+        WebinosService.call(this, obj);
     };
     
-    Media.prototype = new WebinosService;
+    _webinos.registerServiceConstructor("http://webinos.org/api/media", Media);
 
     Media.prototype.bindService = function (bindCB, serviceId) {
 	    // actually there should be an auth check here or whatever, but we just always bind
