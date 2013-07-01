@@ -28,7 +28,7 @@
                 test = {};
                 recentService = null;
                 $('#getMediaServices').empty();
-                webinos.discovery.findServices(new ServiceType('http://www.w3.org/ns/api-perms/media'),
+                webinos.discovery.findServices(new ServiceType('http://webinos.org/api/media'),
                         {onFound:function (service) {
                             test[service.serviceAddress] = service;
                             console.log(service);
