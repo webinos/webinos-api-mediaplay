@@ -21,82 +21,30 @@
 
             webinos.session.addListener('info', printInfo);
 
-            var test = {};
+            var services = {};
             var recentService;
 
             $('#findService').bind('click', function () {
-                test = {};
+                services = {};
                 recentService = null;
                 $('#getMediaServices').empty();
-                webinos.discovery.findServices(new ServiceType('http://www.w3.org/ns/api-perms/media'),
+                webinos.discovery.findServices(new ServiceType('http://webinos.org/api/media'),
                         {onFound:function (service) {
-                            test[service.serviceAddress] = service;
+                            services[service.serviceAddress] = service;
                             console.log(service);
                             $('#getMediaServices').append($('<option>' + service.serviceAddress + '</option>'));
                         }});
             });
             $('#bind').bind('click', function () {
-                recentService = test[$('#getMediaServices option:selected').val()];
+                recentService = services[$('#getMediaServices option:selected').val()];
                 recentService.bindService({onBind:function (service) {
-                    logMessage('TEST API ' + service.api + ' bound.');
+                    logMessage('MEDIA API ' + service.api + ' bound.');
                 }});
             });
-            
-            $('#goleft').bind('click', function () {
-                recentService.left(function (result) {
-                            alert(result);
-                        },
-                        function (error) {
-                            alert(error.code + " " + error.message);
-                        });
-            });
-            
-             $('#goright').bind('click', function () {
-                recentService.right(function (result) {
-                            alert(result);
-                        },
-                        function (error) {
-                            alert(error.code + " " + error.message);
-                        });
-            });
-            
-             $('#goup').bind('click', function () {
-                recentService.up(function (result) {
-                            alert(result);
-                        },
-                        function (error) {
-                            alert(error.code + " " + error.message);
-                        });
-            });
-            
-             $('#godown').bind('click', function () {
-                recentService.down(function () {
-                        },
-                        function () {
-                        });
-            });
-            
-             $('#sendok').bind('click', function () {
-                recentService.click(function (result) {
-                            alert(result);
-                        },
-                        function (error) {
-                            alert(error.code + " " + error.message);
-                        });
-            });
-            
-            $('#back').bind('click', function () {
-                recentService.back(function (result) {
-                            alert(result);
-                        },
-                        function (error) {
-                            alert(error.code + " " + error.message);
-                        });
-            });
-            
             $('#play').bind('click', function () {
-                recentService.play(function (result) {
-                            alert(result);
+                alert($('#path').val());
+                recentService.play($('#path').val(), function (result) {
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
@@ -104,8 +52,8 @@
             });
             
             $('#pause').bind('click', function () {
-                recentService.pause(function (result) {
-                            alert(result);
+                recentService.playPause(function (result) {
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
@@ -114,7 +62,7 @@
             
             $('#stepforward').bind('click', function () {
                 recentService.stepforward(function (result) {
-                            alert(result);
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
@@ -123,7 +71,7 @@
             
             $('#stepback').bind('click', function () {
                 recentService.stepback(function (result) {
-                            alert(result);
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
@@ -132,20 +80,35 @@
             
             $('#stop').bind('click', function () {
                 recentService.stop(function (result) {
-                            alert(result);
+                            console.log(result);
                         },
                         function (error) {
                             alert(error.code + " " + error.message);
                         });
             });
-
+            $('#volumeup').bind('click', function () {
+                recentService.volumeUP(function (result) {
+                            console.log(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
+            $('#volumedown').bind('click', function () {
+                recentService.volumeDOWN(function (result) {
+                            console.log(result);
+                        },
+                        function (error) {
+                            alert(error.code + " " + error.message);
+                        });
+            });
         });
     </script>
 </head>
 <body>
 <table>
     <tr>
-        <td>Use "Find Services" to search for available get42-Services.<br/>
+        <td>Use "Find Services" to search for available Media API services<br/>
             Select one, then bind and use. Select another and bind again and use.
         </td>
     </tr>
@@ -167,49 +130,46 @@
             <button id="bind" class="button">Bind</button>
         </td>
     </tr>
+</table>
+<table>
+    Insert path to movie:
+    <br/>
     <tr>
         <td>
-            <button id="goleft" class="button">LEFT</button>
+            <input type="text" id="path"><br>
         </td>
-        <td>
-            <button id="goright" class="button">RIGHT</button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <button id="goup" class="button">UP</button>
-        </td>
-        <td>
-            <button id="godown" class="button">DOWN</button>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <button id="sendok" class="button">OK</button>
-        </td>
-        <td>
-            <button id="back" class="button">BACK</button>
-        </td>
-    </tr>
-    <tr>
         <td>
             <button id="play" class="button">PLAY</button>
         </td>
-        <td>
-            <button id="pause" class="button">PAUSE</button>
-        </td>
     </tr>
+<table>    
     <tr>
         <td>
-            <button id="stepforward" class="button">FF</button>
+            <button id="stepback" class="button">&#60;&#60;</button>
         </td>
         <td>
-            <button id="stepback" class="button">BB</button>
+            <button id="pause" class="button">PAUSE/RESUME</button>
+        </td>
+        <td>
+            <button id="stepforward" class="button">&#62;&#62;</button>
         </td>
     </tr>
+</table>
     <tr>
         <td>
             <button id="stop" class="button">STOP</button>
+        </td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td>
+            <button id="volumeup" class="button">V+</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="volumedown" class="button">V-</button>
         </td>
     </tr>
 </table>
