@@ -23,7 +23,6 @@
     _webinos.registerServiceConstructor("http://webinos.org/api/media", Media);
 
     Media.prototype.bindService = function (bindCB, serviceId) {
-	    // actually there should be an auth check here or whatever, but we just always bind
 	    if (typeof bindCB.onBind === 'function') {
 		    bindCB.onBind(this);
 	    };
