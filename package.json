@@ -35,7 +35,6 @@
   }, 
   "dependencies":
   {
-    "xbmc": "x.x.x"
   },
   "bundleDependencies":
   [ "events", 
@@ -49,5 +48,5 @@
   "dist": {
     "shasum": "f67cc7e88d8b173cd99dff4e796ed889995f3d57"
   },
-  "_from": "git+http://github.com/michelemorello/webinos-api-media.git"
+  "_from": "git+http://github.com/webinos/webinos-api-media.git"
 }
