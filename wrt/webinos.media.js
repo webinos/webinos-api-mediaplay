@@ -35,7 +35,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "playvideo", [ path ]);
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -48,7 +48,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "playPause");
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -61,7 +61,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "stepforward"); 
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -74,7 +74,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "bigStepforward");
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -87,7 +87,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "stepback");
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -100,7 +100,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "bigStepback");
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -113,7 +113,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "stop");
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -126,7 +126,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "volumeUP");
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -139,7 +139,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "volumeDOWN");
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -152,7 +152,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "increasePlaybackSpeed");
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -165,7 +165,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "decreasePlaybackSpeed");
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -178,7 +178,7 @@
        var rpc =webinos.rpcHandler.createRPC(this, "showInfo");
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')
@@ -191,7 +191,7 @@
        var rpc = webinos.rpcHandler.createRPC(this, "toggleSubtitle");
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
-            successCB(params);
+            if (typeof(successCB) === 'function')successCB(params);
         }, function(error)
         {
             if (typeof(errorCB) !== 'undefined')

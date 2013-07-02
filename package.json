@@ -35,8 +35,6 @@
   }, 
   "dependencies":
   {
-    "xbmc": "x.x.x",
-    "omxcontrol": "x.x.x"
   },
   "bundleDependencies":
   [ "events", 

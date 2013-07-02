@@ -21,24 +21,24 @@
 
             webinos.session.addListener('info', printInfo);
 
-            var test = {};
+            var services = {};
             var recentService;
 
             $('#findService').bind('click', function () {
-                test = {};
+                services = {};
                 recentService = null;
                 $('#getMediaServices').empty();
                 webinos.discovery.findServices(new ServiceType('http://webinos.org/api/media'),
                         {onFound:function (service) {
-                            test[service.serviceAddress] = service;
+                            services[service.serviceAddress] = service;
                             console.log(service);
                             $('#getMediaServices').append($('<option>' + service.serviceAddress + '</option>'));
                         }});
             });
             $('#bind').bind('click', function () {
-                recentService = test[$('#getMediaServices option:selected').val()];
+                recentService = services[$('#getMediaServices option:selected').val()];
                 recentService.bindService({onBind:function (service) {
-                    logMessage('TEST API ' + service.api + ' bound.');
+                    logMessage('MEDIA API ' + service.api + ' bound.');
                 }});
             });
             $('#play').bind('click', function () {
