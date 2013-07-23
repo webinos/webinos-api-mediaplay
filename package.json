@@ -28,25 +28,24 @@
     "node_modules": "./node_modules",
     "test": "./test"
   },
-  "main": "./lib/service.js", 
-  "devDependencies":
-  { "webinos-jsonrpc2": "*",
+  "main": "./lib/service.js",
+  "devDependencies": {
+    "webinos-jsonrpc2": "*",
     "webinos-utilities": "git+https://github.com/webinos/webinos-utilities.git"
-  }, 
-  "dependencies":
-  {
   },
-  "bundleDependencies":
-  [ "events", 
+  "dependencies": {},
+  "bundleDependencies": [
+    "events",
     "fs",
     "https",
-    "path", 
+    "path",
     "url"
   ],
   "_id": "webinos-api-media@0.0.1",
   "readme": "ERROR: No README.md file found!",
   "dist": {
-    "shasum": "f67cc7e88d8b173cd99dff4e796ed889995f3d57"
+    "shasum": "28d1b24008e01d5898a5a77b007fd11d61690a4a"
   },
-  "_from": "git+http://github.com/webinos/webinos-api-media.git"
+  "_from": "git+http://github.com/webinos/webinos-api-media.git",
+  "_resolved": "git+https://github.com/webinos/webinos-api-media.git#7a0b217e8575478c38135fbb0a2ff9ef50bc5902"
 }
