@@ -9,7 +9,7 @@
     "media",
     "API"
   ],
-  "version": "0.0.1",
+  "version": "0.8.0",
   "homepage": "http://developer.webinos.org/",
   "author": {
     "name": "Michele Morello, Paolo Vergori",
