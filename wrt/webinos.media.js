@@ -114,7 +114,7 @@
     
     Media.prototype.play = function(path, successCB, errorCB)
     {
-        var rpc = webinos.rpcHandler.createRPC(this, "playvideo", [ path ]);
+        var rpc = webinos.rpcHandler.createRPC(this, "startPlay", [ path ]);
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
             if (typeof(successCB) === 'function')successCB(params);
