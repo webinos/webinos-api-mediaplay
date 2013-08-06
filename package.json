@@ -1,7 +1,7 @@
 {
   "name": "webinos-api-media",
   "publishConfig": {
-    "tag": "alpha"
+    "tag": "beta"
   },
   "description": "media API",
   "keywords": [
@@ -9,11 +9,11 @@
     "media",
     "API"
   ],
-  "version": "0.0.1",
+  "version": "0.8.0",
   "homepage": "http://developer.webinos.org/",
   "author": {
-    "name": "Michele Morello",
-    "email": "morello@ismb.it"
+    "name": "Michele Morello, Paolo Vergori",
+    "email": "morello@ismb.it, vergori@ismb.it"
   },
   "repository": {
     "type": "git",
