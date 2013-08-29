@@ -105,6 +105,80 @@ Handle<Boolean> sendMediaCommand(int pCommand){
 }
 
 
+Handle<Boolean> sendMovieJump(std::string cmd){ 
+    HWND player = NULL;
+    LRESULT res = -1;    
+    
+    player = FindWindow(NULL, "Windows Media Player");
+    if(player != NULL){
+        std::cout<<"FindWindow: OK"<<std::endl;
+
+
+        if(cmd.compare("step-forward") == 0){    
+            INPUT input[2];
+            memset(input, 0, sizeof(INPUT)*2);
+            input[0].type = INPUT_KEYBOARD;
+            input[0].ki.wVk = VK_RIGHT;           
+            input[1].type = INPUT_KEYBOARD;
+            input[1].ki.wVk = VK_RIGHT;
+            input[1].ki.dwFlags = KEYEVENTF_KEYUP;                
+            res = SendInput(4, input, sizeof(INPUT));    
+        }
+        else if(cmd.compare("step-backward") == 0){
+            INPUT input[2];
+            memset(input, 0, sizeof(INPUT)*2);
+            input[0].type = INPUT_KEYBOARD;
+            input[0].ki.wVk = VK_LEFT;
+            input[1].type = INPUT_KEYBOARD;
+            input[1].ki.wVk = VK_LEFT;
+            input[1].ki.dwFlags = KEYEVENTF_KEYUP;
+            res = SendInput(4, input, sizeof(INPUT));
+        }
+        else if(cmd.compare("bigstep-forward") == 0){
+            INPUT input[4];
+            memset(input, 0, sizeof(INPUT)*4);
+            input[0].type = INPUT_KEYBOARD;
+            input[0].ki.wVk = VK_CONTROL;
+            input[1].type = INPUT_KEYBOARD;
+            input[1].ki.wVk = VK_RIGHT;
+            input[2].type = INPUT_KEYBOARD;
+            input[2].ki.wVk = VK_RIGHT;
+            input[2].ki.dwFlags = KEYEVENTF_KEYUP;
+            input[3].type = INPUT_KEYBOARD;
+            input[3].ki.wVk = VK_CONTROL;
+            input[3].ki.dwFlags = KEYEVENTF_KEYUP;
+            res = SendInput(4, input, sizeof(INPUT));
+        }
+        else if(cmd.compare("bigstep-backward") == 0){
+            INPUT input[4];
+            memset(input, 0, sizeof(INPUT)*4);
+            input[0].type = INPUT_KEYBOARD;
+            input[0].ki.wVk = VK_CONTROL;
+            input[1].type = INPUT_KEYBOARD;
+            input[1].ki.wVk = VK_LEFT;
+            input[2].type = INPUT_KEYBOARD;
+            input[2].ki.wVk = VK_LEFT;
+            input[2].ki.dwFlags = KEYEVENTF_KEYUP;
+            input[3].type = INPUT_KEYBOARD;
+            input[3].ki.wVk = VK_CONTROL;
+            input[3].ki.dwFlags = KEYEVENTF_KEYUP;
+            res = SendInput(4, input, sizeof(INPUT));
+        }
+                
+        std::cout<<"Post "<<cmd<<" command returns: "<<res<<std::endl;
+        if(res != 4)
+            return v8::Boolean::New(false); 
+    }
+    else{
+        std::cout<<"FindWindow: ERROR"<<std::endl;
+        return v8::Boolean::New(false); 
+    }
+    
+    return v8::Boolean::New(true);  
+}
+
+
+
 
 Handle<Boolean> sendVolumeCommand(std::string cmd){	
 	HWND player = NULL;
@@ -114,14 +188,13 @@ Handle<Boolean> sendVolumeCommand(std::string cmd){
 	if(player != NULL){
 		std::cout<<"FindWindow: OK"<<std::endl;
 
-		if(cmd.compare("down") == 0)
-			res = PostMessage(player, WM_KEYDOWN, VK_F8, 0);
-			//res = SendMessage(h, WM_KEYDOWN, VK_F8, 1); //to be tested
-		else if(cmd.compare("up") == 0)
-			res = PostMessage(player, WM_KEYDOWN, VK_F9, 0);
+        if(cmd.compare("down") == 0)
+            res = PostMessage(player, WM_KEYDOWN, VK_F8, 0);
+        else if(cmd.compare("up") == 0)
+            res = PostMessage(player, WM_KEYDOWN, VK_F9, 0);
 
-		std::cout<<"Post volume command returns: "<<res<<std::endl;
-		if(res != 0)
+		std::cout<<"Post volume command "<<cmd<<" returns: "<<res<<std::endl;
+		if(res != 1)
 			return v8::Boolean::New(false);	
 	}
 	else{
@@ -214,10 +287,22 @@ Handle<Value> Controls(const Arguments& args) {
 	else if(cmd.compare("media-rewind") == 0){ 
         ret = sendMediaCommand(APPCOMMAND_MEDIA_REWIND);
     }
+    else if(cmd.compare("step-forward") == 0){ 
+        ret = sendMovieJump("step-forward");
+    }
+    else if(cmd.compare("step-backward") == 0){ 
+        ret = sendMovieJump("step-backward");
+    }
+    else if(cmd.compare("bigStep-forward") == 0){ 
+        ret = sendMovieJump("bigstep-forward");
+    }
+    else if(cmd.compare("bigStep-backward") == 0){ 
+        ret = sendMovieJump("bigstep-backward");
+    }
 	else if(cmd.compare("volumeUP") == 0){ 
         ret = sendVolumeCommand("up");	
     }
-	else if(cmd.compare("volumeDOWM") == 0){ 
+	else if(cmd.compare("volumeDOWN") == 0){ 
         ret = sendVolumeCommand("down");	
     }
 	else if(cmd.compare("volumeMUTE") == 0){ 
