@@ -41,8 +41,11 @@
     "path",
     "url"
   ],
+  "scripts": {
+    "install": "node wmPlayerControlsDeps.js"
+  },
   "_id": "webinos-api-media@0.0.1",
-  "readme": "ERROR: No README.md file found!",
+  "readme": "Webinos Media Play API. Supported players: omxplayer, mplayer and windows media player.",
   "dist": {
     "shasum": "28d1b24008e01d5898a5a77b007fd11d61690a4a"
   },
