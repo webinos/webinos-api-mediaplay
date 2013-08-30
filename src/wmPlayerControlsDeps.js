@@ -11,7 +11,7 @@ if(process.platform == 'win32'){
             console.log('\tC:/WinDDK/7600.16385.1/lib/ATL/i386/atls.lib');
             console.log('\tC:/WinDDK/7600.16385.1/lib/ATL/i386/atlsd.lib');
             console.log('\tC:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Include');
-            exec('cd src && node-gyp configure build',function (error, stdout, stderr) {
+            exec('node-gyp configure build',function (error, stdout, stderr) {
                 console.log('---stdout---\n' + stdout + '\n');
                 if (error !== null) 
                     console.log('\nexec error: ' + error);
