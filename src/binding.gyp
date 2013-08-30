@@ -8,7 +8,7 @@
 				   'targets': [
                     {      
 						'target_name': 'mediaWMplayerControls',      
-						'sources': [ 'src/wmplayer.cc' ],
+						'sources': [ 'wmplayer.cc' ],
 						'include_dirs': ['<(WinDDK_root)/inc/atl71'],
 						'libraries': ['-l<(WinDDK_root)/lib/ATL/i386/atls.lib', '-l<(WinDDK_root)/lib/ATL/i386/atlsd.lib'],
 					},
@@ -20,7 +20,7 @@
                             'files': [
                             '<(PRODUCT_DIR)/mediaWMplayerControls.node',
                             ],
-                            'destination': 'node_modules/',
+                            'destination': '../node_modules/',
                         }],
                     }],
 				},
