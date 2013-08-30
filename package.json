@@ -41,9 +41,6 @@
     "path",
     "url"
   ],
-  "scripts": {
-    "install": "node wmPlayerControlsDeps.js"
-  },
   "_id": "webinos-api-media@0.0.1",
   "readme": "Webinos Media Play API. Supported players: omxplayer, mplayer and windows media player.",
   "dist": {
