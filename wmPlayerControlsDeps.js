@@ -1,7 +1,7 @@
 if(process.platform == 'win32'){
     fs = require('fs');
     var exec = require('child_process').exec;
-    fs.exists('node_modules\\mediaWMplayerControls.node', function(exists){
+    fs.exists('src\\build\\Release\\mediaWMplayerControls.node', function(exists){
         if(exists)
             console.log('mediaWMplayerControls.node found!');            
         else{
@@ -11,7 +11,7 @@ if(process.platform == 'win32'){
             console.log('\tC:/WinDDK/7600.16385.1/lib/ATL/i386/atls.lib');
             console.log('\tC:/WinDDK/7600.16385.1/lib/ATL/i386/atlsd.lib');
             console.log('\tC:/Program Files (x86)/Microsoft SDKs/Windows/v7.0A/Include');
-            exec('cd src; node-gyp configure build',function (error, stdout, stderr) {
+            exec('cd src && node-gyp configure build',function (error, stdout, stderr) {
                 console.log('---stdout---\n' + stdout + '\n');
                 if (error !== null) 
                     console.log('\nexec error: ' + error);
