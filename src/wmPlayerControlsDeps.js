@@ -4,7 +4,7 @@ if(process.platform == 'win32'){
     fs.exists('src\\build\\Release\\mediaWMplayerControls.node', function(exists){
         if(exists){
             console.log('mediaWMplayerControls.node found!');
-            exec('xcopy /Y build\\Release\\mediaWMplayerControls.node ..\\node_modules\\',function (error, stdout, stderr) {
+            exec('xcopy /Y src\\build\\Release\\mediaWMplayerControls.node node_modules\\',function (error, stdout, stderr) {
                 console.log('---stdout---\n' + stdout + '\n');
                 if (error !== null) 
                     console.log('\nexec error: ' + error);
