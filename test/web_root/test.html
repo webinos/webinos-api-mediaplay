@@ -23,17 +23,22 @@
 
             var services = {};
             var recentService;
-
-            $('#findService').bind('click', function () {
+            
+            var find = function() {
                 services = {};
                 recentService = null;
                 $('#getMediaServices').empty();
                 webinos.discovery.findServices(new ServiceType('http://webinos.org/api/media'),
                         {onFound:function (service) {
-                            services[service.serviceAddress] = service;
+                            services[service.id] = service;
                             console.log(service);
-                            $('#getMediaServices').append($('<option>' + service.serviceAddress + '</option>'));
+                            $('#getMediaServices').append($('<option value="' + service.id + '">' + service.displayName + '</option>'));
                         }});
+            };
+            find();
+
+            $('#findService').bind('click', function () {
+                find();
             });
             $('#bind').bind('click', function () {
                 recentService = services[$('#getMediaServices option:selected').val()];
@@ -42,7 +47,6 @@
                 }});
             });
             $('#play').bind('click', function () {
-                alert($('#path').val());
                 recentService.play($('#path').val(), function (result) {
                             console.log(result);
                         },

@@ -33,7 +33,9 @@
     "webinos-jsonrpc2": "*",
     "webinos-utilities": "git+https://github.com/webinos/webinos-utilities.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "peer-upnp": "~0.0.1"
+  },
   "bundleDependencies": [
     "events",
     "fs",
