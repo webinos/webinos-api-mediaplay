@@ -30,9 +30,9 @@
                 $('#getMediaServices').empty();
                 webinos.discovery.findServices(new ServiceType('http://webinos.org/api/media'),
                         {onFound:function (service) {
-                            services[service.id] = service;
+                            services[service.displayName] = service;
                             console.log(service);
-                            $('#getMediaServices').append($('<option value="' + service.id + '">' + service.displayName + '</option>'));
+                            $('#getMediaServices').append($('<option>' + service.displayName + '</option>'));
                         }});
             };
             find();
