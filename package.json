@@ -41,7 +41,10 @@
     "fs",
     "https",
     "path",
-    "url"
+    "url",
+    "http",
+    "util",
+    "dgram"
   ],
   "scripts": {
     "install": "node src/wmPlayerControlsDeps.js"
