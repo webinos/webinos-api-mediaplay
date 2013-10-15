@@ -8,10 +8,10 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>media</artifactId>
+  <artifactId>mediaplay</artifactId>
   <packaging>pom</packaging>
 
-  <name>Media</name>
+  <name>MediaPlay API</name>
   <url>http://www.webinos.org</url>
 
   <!-- Uncomment the plugin executions you need. If you're component structure is correct, 
