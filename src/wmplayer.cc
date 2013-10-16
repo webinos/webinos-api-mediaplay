@@ -105,24 +105,24 @@ Handle<Boolean> sendMediaCommand(int pCommand){
 }
 
 
-Handle<Boolean> sendMovieJump(std::string cmd){ 
+Handle<Boolean> sendMovieJump(std::string cmd){
     HWND player = NULL;
-    LRESULT res = -1;    
-    
+    LRESULT res = -1;
+
     player = FindWindow(NULL, "Windows Media Player");
     if(player != NULL){
         std::cout<<"FindWindow: OK"<<std::endl;
 
 
-        if(cmd.compare("step-forward") == 0){    
+        if(cmd.compare("step-forward") == 0){
             INPUT input[2];
             memset(input, 0, sizeof(INPUT)*2);
             input[0].type = INPUT_KEYBOARD;
-            input[0].ki.wVk = VK_RIGHT;           
+            input[0].ki.wVk = VK_RIGHT;
             input[1].type = INPUT_KEYBOARD;
             input[1].ki.wVk = VK_RIGHT;
-            input[1].ki.dwFlags = KEYEVENTF_KEYUP;                
-            res = SendInput(4, input, sizeof(INPUT));    
+            input[1].ki.dwFlags = KEYEVENTF_KEYUP;
+            res = SendInput(4, input, sizeof(INPUT));
         }
         else if(cmd.compare("step-backward") == 0){
             INPUT input[2];
@@ -164,17 +164,17 @@ Handle<Boolean> sendMovieJump(std::string cmd){
             input[3].ki.dwFlags = KEYEVENTF_KEYUP;
             res = SendInput(4, input, sizeof(INPUT));
         }
-                
+
         std::cout<<"Post "<<cmd<<" command returns: "<<res<<std::endl;
         if(res != 4)
-            return v8::Boolean::New(false); 
+            return v8::Boolean::New(false);
     }
     else{
         std::cout<<"FindWindow: ERROR"<<std::endl;
-        return v8::Boolean::New(false); 
+        return v8::Boolean::New(false);
     }
-    
-    return v8::Boolean::New(true);  
+
+    return v8::Boolean::New(true);
 }
 
 
@@ -235,11 +235,11 @@ Handle<Value> Controls(const Arguments& args) {
 	Handle<Boolean> ret;
 
 	//convert from v8::String to std::string
-    v8::String::Utf8Value argUTF8_cmd(args[0]->ToString());    
+    v8::String::Utf8Value argUTF8_cmd(args[0]->ToString());
     std::string cmd = std::string(*argUTF8_cmd);
-	v8::String::Utf8Value argUTF8_media(args[1]->ToString());    
+	v8::String::Utf8Value argUTF8_media(args[1]->ToString());
 	std::string media = std::string(*argUTF8_media);
-    
+
     if(args.Length() != 1 && cmd.compare("open") != 0) {
 		ThrowException(Exception::TypeError(String::New("Wrong number of arguments for this command")));
 		return v8::Boolean::New(false);
@@ -248,21 +248,21 @@ Handle<Value> Controls(const Arguments& args) {
 		ThrowException(Exception::TypeError(String::New("Wrong number of arguments for open command")));
 		return v8::Boolean::New(false);
 	}
-    
+
 	if (!args[0]->IsString()) {
         ThrowException(Exception::TypeError(String::New("Wrong arguments type")));
         return scope.Close(Undefined());
-    }     
-    
+    }
 
-    if(cmd.compare("open") == 0){ 
+
+    if(cmd.compare("open") == 0){
 		std::cout<<cmd<<std::endl;		
 		if(!file_exists(media.c_str())){
 			std::cout<<"Error: cannot open media file '"<<media<<"'"<<std::endl;
 			return v8::Boolean::New(false);
 		}
-		//wchar_t* file = L"C:\\Videos\\sintel-2048-surround.mp4"; 
-		std::wstring file(media.begin(), media.end()); 
+		//wchar_t* file = L"C:\\Videos\\sintel-2048-surround.mp4";
+		std::wstring file(media.begin(), media.end());
         ret = openMedia(file.c_str());
 		Sleep(3000); //to be sure that windows in created
 		setFullscreen();
@@ -272,48 +272,48 @@ Handle<Value> Controls(const Arguments& args) {
 		for(int i=0; i<3;i++) sendVolumeCommand("up");
 
     }
-    else if(cmd.compare("play") == 0){ 
+    else if(cmd.compare("play") == 0){
         ret = sendMediaCommand(APPCOMMAND_MEDIA_PLAY);
     }
-    else if(cmd.compare("pause") == 0){ 
+    else if(cmd.compare("pause") == 0){
         ret = sendMediaCommand(APPCOMMAND_MEDIA_PAUSE);
     }
-	else if(cmd.compare("stop") == 0){ 
+	else if(cmd.compare("stop") == 0){
         ret = sendMediaCommand(APPCOMMAND_MEDIA_STOP);
     }
-	else if(cmd.compare("fast-forward") == 0){ 
+	else if(cmd.compare("fast-forward") == 0){
         ret = sendMediaCommand(APPCOMMAND_MEDIA_FAST_FORWARD);
     }
-	else if(cmd.compare("media-rewind") == 0){ 
+	else if(cmd.compare("media-rewind") == 0){
         ret = sendMediaCommand(APPCOMMAND_MEDIA_REWIND);
     }
-    else if(cmd.compare("step-forward") == 0){ 
+    else if(cmd.compare("step-forward") == 0){
         ret = sendMovieJump("step-forward");
     }
-    else if(cmd.compare("step-backward") == 0){ 
+    else if(cmd.compare("step-backward") == 0){
         ret = sendMovieJump("step-backward");
     }
-    else if(cmd.compare("bigStep-forward") == 0){ 
+    else if(cmd.compare("bigStep-forward") == 0){
         ret = sendMovieJump("bigstep-forward");
     }
-    else if(cmd.compare("bigStep-backward") == 0){ 
+    else if(cmd.compare("bigStep-backward") == 0){
         ret = sendMovieJump("bigstep-backward");
     }
-	else if(cmd.compare("volumeUP") == 0){ 
+	else if(cmd.compare("volumeUP") == 0){
         ret = sendVolumeCommand("up");	
     }
-	else if(cmd.compare("volumeDOWN") == 0){ 
+	else if(cmd.compare("volumeDOWN") == 0){
         ret = sendVolumeCommand("down");	
     }
-	else if(cmd.compare("volumeMUTE") == 0){ 
+	else if(cmd.compare("volumeMUTE") == 0){
         ret = sendVolumeCommand("mute");	
     }
-	else if(cmd.compare("close") == 0){ 
+	else if(cmd.compare("close") == 0){
         ret = sendClose();
     }
     else
         return v8::Boolean::New(false);
-    
+
     return scope.Close(ret);
 }
 

@@ -6,10 +6,10 @@ if(process.platform == 'win32'){
             console.log('mediaWMplayerControls.node found!');
             exec('xcopy /Y src\\build\\Release\\mediaWMplayerControls.node node_modules\\',function (error, stdout, stderr) {
                 console.log('---stdout---\n' + stdout + '\n');
-                if (error !== null) 
+                if (error !== null)
                     console.log('\nexec error: ' + error);
             });
-        }   
+        }
         else{
             console.log('mediaWMplayerControls.node not found! proceeding with fresh compilation');
             console.log('Required dependencies:');
@@ -22,6 +22,6 @@ if(process.platform == 'win32'){
                 if (error !== null)
                     console.log('\nexec error: ' + error);
             });
-        }        
+        }
     });
 }

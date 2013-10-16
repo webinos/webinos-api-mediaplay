@@ -8,13 +8,13 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>media</artifactId>
+  <artifactId>mediaplay</artifactId>
   <packaging>pom</packaging>
 
-  <name>Media</name>
+  <name>MediaPlay API</name>
   <url>http://www.webinos.org</url>
 
-  <!-- Uncomment the plugin executions you need. If you're component structure is correct, 
+  <!-- Uncomment the plugin executions you need. If you're component structure is correct,
   everything will run as it should. -->
   <build>
     <plugins>
@@ -35,7 +35,7 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <executions>
-          <!-- Activation for build-node-modules. Activate by uncommenting the execution tag. 
+          <!-- Activation for build-node-modules. Activate by uncommenting the execution tag.
           Only needed when C files that need to be compiled to a node module are present in the src folder. -->
           <!--
           <execution>
@@ -45,7 +45,7 @@
             </goals>
           </execution>
           -->
-          <!-- Activation for jasmine-node-testing. Activate by uncommenting the execution tag. 
+          <!-- Activation for jasmine-node-testing. Activate by uncommenting the execution tag.
           Only needed when *.spec.js files in the jasmine test folder need to run.-->
           <!--
           <execution>
@@ -62,7 +62,7 @@
               <goal>exec</goal>
             </goals>
           </execution>
-          <!-- Activation for vows-testing. Activate by uncommenting the execution tag.  
+          <!-- Activation for vows-testing. Activate by uncommenting the execution tag.
           Only needed when test.spec.js files in the vows test folder need to run.-->
           <!--
           <execution>
