@@ -28,7 +28,7 @@
                 services = {};
                 recentService = null;
                 $('#getMediaServices').empty();
-                webinos.discovery.findServices(new ServiceType('http://webinos.org/api/media'),
+                webinos.discovery.findServices(new ServiceType('http://webinos.org/api/mediaplay'),
                         {onFound:function (service) {
                             services[service.displayName] = service;
                             console.log(service);
@@ -43,7 +43,7 @@
             $('#bind').bind('click', function () {
                 recentService = services[$('#getMediaServices option:selected').val()];
                 recentService.bindService({onBind:function (service) {
-                    logMessage('MEDIA API ' + service.api + ' bound.');
+                    logMessage('MediaPlay API ' + service.api + ' bound.');
                 }});
             });
             $('#play').bind('click', function () {
@@ -65,7 +65,7 @@
             });
             
             $('#stepforward').bind('click', function () {
-                recentService.stepforward(function (result) {
+                recentService.seek("FORWARD", function (result) {
                             console.log(result);
                         },
                         function (error) {
@@ -74,7 +74,7 @@
             });
             
             $('#stepback').bind('click', function () {
-                recentService.stepback(function (result) {
+                recentService.seek("BACKWARD", function (result) {
                             console.log(result);
                         },
                         function (error) {
@@ -91,7 +91,7 @@
                         });
             });
             $('#volumeup').bind('click', function () {
-                recentService.volumeUP(function (result) {
+                recentService.setVolume(0.2, function (result) {
                             console.log(result);
                         },
                         function (error) {
@@ -99,7 +99,7 @@
                         });
             });
             $('#volumedown').bind('click', function () {
-                recentService.volumeDOWN(function (result) {
+                recentService.setVolume(1.0, function (result) {
                             console.log(result);
                         },
                         function (error) {
@@ -112,7 +112,7 @@
 <body>
 <table>
     <tr>
-        <td>Use "Find Services" to search for available Media API services<br/>
+        <td>Use "Find Services" to search for available MediaPlay API services<br/>
             Select one, then bind and use. Select another and bind again and use.
         </td>
     </tr>

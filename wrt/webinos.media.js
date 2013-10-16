@@ -18,290 +18,161 @@
 
 (function()
 {
-    Media = function(obj) {
+    MediaPlay = function(obj) {
         WebinosService.call(this, obj);
     };
     
-    _webinos.registerServiceConstructor("http://webinos.org/api/media", Media);
+    _webinos.registerServiceConstructor("http://webinos.org/api/mediaplay", MediaPlay);
 
-    Media.prototype.bindService = function (bindCB, serviceId) {
-	    if (typeof bindCB.onBind === 'function') {
-		    bindCB.onBind(this);
-	    };
+    MediaPlay.prototype.bindService = function (bindCB, serviceId) {
+        if (typeof bindCB.onBind === 'function') {
+            bindCB.onBind(this);
+        };
 
         var rpc = webinos.rpcHandler.createRPC(this, "bindService");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-                errorCB(error);
-        })
-    }
+        webinos.rpcHandler.executeRPC(rpc);
+    };
     var rpcCB = {};
 
-	Media.prototype.registerListeners = function(callbacks, successCB, errorCB)
-	{
+    MediaPlay.prototype.addListener = function(callbacks, successCB, errorCB) {
         //should be checked if a rpcCB has been already created. So, it should be prevented an application to register multiple listeners.
         
         rpcCB = webinos.rpcHandler.createRPC(this, "registerListeners");
         
         rpcCB.onStop = rpcCB.onEnd = rpcCB.onPlay = rpcCB.onPause = rpcCB.onVolumeUP = rpcCB.onVolumeDOWN = rpcCB.onVolumeSet = function(){};
 
-        if(typeof callbacks.onStop === "function") 
+        if(typeof callbacks.onStop === "function")
             rpcCB.onStop = callbacks.onStop;
         
-        if(typeof callbacks.onEnd === "function") 
+        if(typeof callbacks.onEnd === "function")
             rpcCB.onEnd = callbacks.onEnd;
         
-        if(typeof callbacks.onPlay === "function") 
+        if(typeof callbacks.onPlay === "function")
             rpcCB.onPlay = callbacks.onPlay;
         
-        if(typeof callbacks.onPause === "function") 
+        if(typeof callbacks.onPause === "function")
             rpcCB.onPause = callbacks.onPause;
 
-        if(typeof callbacks.onVolumeUP === "function") 
+        if(typeof callbacks.onVolumeUP === "function")
             rpcCB.onVolumeUP = callbacks.onVolumeUP;
 
-        if(typeof callbacks.onVolumeDOWN === "function") 
+        if(typeof callbacks.onVolumeDOWN === "function")
             rpcCB.onVolumeDOWN = callbacks.onVolumeDOWN;
         
-        if(typeof callbacks.onVolumeSet === "function") 
+        if(typeof callbacks.onVolumeSet === "function")
             rpcCB.onVolumeSet = callbacks.onVolumeSet;
 
-        webinos.rpcHandler.registerCallbackObject(rpcCB);             
+        webinos.rpcHandler.registerCallbackObject(rpcCB);
 
-        webinos.rpcHandler.executeRPC(rpcCB, function(params)
-        {
+        webinos.rpcHandler.executeRPC(rpcCB, function(params) {
             if (typeof(successCB) === 'function') successCB(params);
-        }, function(error) 
-        {
+        }, function(error) {
             //unregister listener if fails to add it
             webinos.rpcHandler.unregisterCallbackObject(rpcCB);
             rpcCB = undefined;
-            
-            if (typeof(errorCB) !== 'undefined') errorCB(error);
+
+            if (typeof(errorCB) === 'function') errorCB(params);
         });
-	}
-	
-	Media.prototype.unregisterListenersOnLeave = function(successCB, errorCB)
-    {
-        var rpc = webinos.rpcHandler.createRPC(this, "unregisterListenersOnLeave");        
-        webinos.rpcHandler.unregisterCallbackObject(rpcCB);
-        
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function') successCB(params);
-        }, function(error) 
-            {
-                if (typeof(errorCB) !== 'undefined') errorCB(error);
-        });
-        rpcCB = undefined;
-    }
-        
-    Media.prototype.unregisterListenersOnExit = function()
-    {
-        var rpc = webinos.rpcHandler.createRPC(this, "unregisterListenersOnExit");         
+    };
+
+    MediaPlay.prototype.removeAllListeners = function(successCB, errorCB) {
+        var rpc = webinos.rpcHandler.createRPC(this, "unregisterListenersOnLeave");
         webinos.rpcHandler.unregisterCallbackObject(rpcCB);
 
-        webinos.rpcHandler.executeRPC(rpc);
-        rpcCB = undefined;
-    }
-    
-    Media.prototype.isPlaying = function(successCB, errorCB)
-    {
-        var rpc = webinos.rpcHandler.createRPC(this, "isPlaying");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
+        webinos.rpcHandler.executeRPC(rpc, function(params) {
             if (typeof(successCB) === 'function') successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-                errorCB(error);
-        })
-    }
-    
-    Media.prototype.play = function(path, successCB, errorCB)
-    {
-        var rpc = webinos.rpcHandler.createRPC(this, "startPlay", [ path ]);
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.playPause = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "playPause");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.stepforward = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "stepforward"); 
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.bigStepforward = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "bigStepforward");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.stepback = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "stepback");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.bigStepback = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "bigStepback");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.stop = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "stop");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.volumeUP = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "volumeUP");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.volumeDOWN = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "volumeDOWN");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.setVolume = function(params, successCB, errorCB)
-    {
+        }, function(error) {
+            if (typeof(errorCB) === 'function') errorCB(params);
+        });
+        rpcCB = undefined;
+    };
+
+    MediaPlay.prototype.isPlaying = function(successCB, errorCB) {
+        var rpc = webinos.rpcHandler.createRPC(this, "isPlaying");
+
+        webinos.rpcHandler.executeRPC(rpc, function(params) {
+            if (typeof(successCB) === 'function') successCB(params);
+        }, function(error) {
+            if (typeof(errorCB) === 'function') errorCB(params);
+        });
+    };
+
+    MediaPlay.prototype.play = function(uri, successCB, errorCB) {
+        var rpc = webinos.rpcHandler.createRPC(this, "startPlay", [ uri ]);
+        webinos.rpcHandler.executeRPC(rpc, function(params) {
+            if (typeof(successCB) === 'function') successCB(params);
+        }, function(error) {
+            if (typeof(errorCB) === 'function') errorCB(params);
+        });
+    };
+
+    MediaPlay.prototype.playPause = function(successCB, errorCB) {
+        var rpc = webinos.rpcHandler.createRPC(this, "playPause");
+        webinos.rpcHandler.executeRPC(rpc, function(params) {
+            if (typeof(successCB) === 'function') successCB(params);
+        }, function(error) {
+            if (typeof(errorCB) === 'function') errorCB(params);
+        });
+    };
+
+    MediaPlay.prototype.stop = function(successCB, errorCB) {
+        var rpc = webinos.rpcHandler.createRPC(this, "stop");
+        webinos.rpcHandler.executeRPC(rpc, function(params) {
+            if (typeof(successCB) === 'function') successCB(params);
+        }, function(error) {
+            if (typeof(errorCB) === 'function') errorCB(params);
+        });
+    };
+
+    MediaPlay.prototype.seek = function(step, successCB, errorCB) {
+        var stepsEnum = {
+                "FORWARD": "stepforward",
+                "FORWARD_BIG": "bigStepforward",
+                "BACKWARD": "stepback",
+                "BACKWARD_BIG": "bigStepback"
+        };
+        var method = stepsEnum[step];
+
+        if (!method && typeof(errorCB) === 'function') {
+            errorCB({name: "unknown step value"});
+            return;
+        }
+
+        var rpc = webinos.rpcHandler.createRPC(this, method);
+        webinos.rpcHandler.executeRPC(rpc, function(params) {
+            if (typeof(successCB) === 'function') successCB(params);
+        }, function(error) {
+            if (typeof(errorCB) === 'function') errorCB(params);
+        });
+    };
+
+    MediaPlay.prototype.setVolume = function(params, successCB, errorCB) {
         var rpc = webinos.rpcHandler.createRPC(this, "setVolume", [ params ]);
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-                errorCB(error);
-        })
-    }
-    
-    Media.prototype.increasePlaybackSpeed = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "increasePlaybackSpeed");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.decreasePlaybackSpeed = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "decreasePlaybackSpeed");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.showInfo = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "showInfo");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
-    Media.prototype.toggleSubtitle = function(successCB, errorCB)
-    {
-       var rpc = webinos.rpcHandler.createRPC(this, "toggleSubtitle");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-            errorCB(error);
-        })
-    }
-    
+        webinos.rpcHandler.executeRPC(rpc, function(params) {
+            if (typeof(successCB) === 'function') successCB(params);
+        }, function(error) {
+            if (typeof(errorCB) === 'function') errorCB(params);
+        });
+    };
+
+    MediaPlay.prototype.setSpeed = function(speed, successCB, errorCB) {
+        var speedEnum = {
+                "FASTER": "increasePlaybackSpeed",
+                "SLOWER": "decreasePlaybackSpeed"
+        };
+        var method = speedEnum[step];
+
+        if (!method && typeof(errorCB) === 'function') {
+            errorCB({name: "unknown step value"});
+            return;
+        }
+
+        var rpc = webinos.rpcHandler.createRPC(this, method);
+        webinos.rpcHandler.executeRPC(rpc, function(params) {
+            if (typeof(successCB) === 'function') successCB(params);
+        }, function(error) {
+            if (typeof(errorCB) === 'function') errorCB(params);
+        });
+    };
+
 }());
