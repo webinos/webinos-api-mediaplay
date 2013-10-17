@@ -41,7 +41,7 @@
     }
     var rpcCB = {};
 
-    Media.prototype.registerListeners = function(listeners, successCB, errorCB)
+    Media.prototype.addListener = function(listener, successCB, errorCB)
 	{
         //should be checked if a rpcCB has been already created. So, it should be prevented an application to register multiple listeners.
 
