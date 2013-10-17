@@ -30,14 +30,7 @@
 	    };
 
         var rpc = webinos.rpcHandler.createRPC(this, "bindService");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-                errorCB(error);
-        })
+        webinos.rpcHandler.executeRPC(rpc);
     }
     var rpcCB = {};
 
