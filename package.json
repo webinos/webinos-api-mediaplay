@@ -1,23 +1,23 @@
 {
-  "name": "webinos-api-media",
+  "name": "webinos-api-mediaplay",
   "publishConfig": {
     "tag": "beta"
   },
-  "description": "media API",
+  "description": "MediaPlay API",
   "keywords": [
     "webinos",
-    "media",
+    "mediaplay",
     "API"
   ],
-  "version": "0.8.0",
+  "version": "0.9.0",
   "homepage": "http://developer.webinos.org/",
   "author": {
-    "name": "Michele Morello, Paolo Vergori",
-    "email": "morello@ismb.it, vergori@ismb.it"
+    "name": "Michele Morello, Paolo Vergori, Alexander Futasz",
+    "email": "morello@ismb.it, vergori@ismb.it, alexander.futasz@fokus.fraunhofer.de"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/webinos/webinos-api-media.git"
+    "url": "https://github.com/webinos/webinos-api-mediaplay.git"
   },
   "bugs": {
     "email": "webinos-wp4-ml@fokus.fraunhofer.de",
@@ -49,11 +49,11 @@
   "scripts": {
     "install": "node src/wmPlayerControlsDeps.js"
   },
-  "_id": "webinos-api-media@0.0.1",
-  "readme": "Webinos Media Play API. Supported players: omxplayer, mplayer and windows media player.",
+  "_id": "webinos-api-mediaplay@0.0.1",
+  "readme": "Webinos MediaPlay API. Supported players: omxplayer, mplayer and windows media player.",
   "dist": {
     "shasum": "28d1b24008e01d5898a5a77b007fd11d61690a4a"
   },
-  "_from": "git+http://github.com/webinos/webinos-api-media.git",
+  "_from": "git+http://github.com/webinos/webinos-api-mediaplay.git",
   "_resolved": "git+https://github.com/webinos/webinos-api-media.git#7a0b217e8575478c38135fbb0a2ff9ef50bc5902"
 }
