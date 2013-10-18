@@ -30,18 +30,11 @@
 	    };
 
         var rpc = webinos.rpcHandler.createRPC(this, "bindService");
-        webinos.rpcHandler.executeRPC(rpc, function(params)
-        {
-            if (typeof(successCB) === 'function')successCB(params);
-        }, function(error)
-        {
-            if (typeof(errorCB) !== 'undefined')
-                errorCB(error);
-        })
+        webinos.rpcHandler.executeRPC(rpc);
     }
     var rpcCB = {};
 
-    Media.prototype.registerListeners = function(listeners, successCB, errorCB)
+    Media.prototype.addListener = function(listener, successCB, errorCB)
 	{
         //should be checked if a rpcCB has been already created. So, it should be prevented an application to register multiple listeners.
 
