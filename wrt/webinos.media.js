@@ -38,7 +38,7 @@
 	{
         //should be checked if a rpcCB has been already created. So, it should be prevented an application to register multiple listeners.
 
-        rpcCB = webinos.rpcHandler.createRPC(this, "registerListeners");
+        rpcCB = webinos.rpcHandler.createRPC(this, "addListener");
 
         rpcCB.onStop = rpcCB.onEnd = rpcCB.onPlay = rpcCB.onPause = rpcCB.onVolumeUP = rpcCB.onVolumeDOWN = rpcCB.onVolumeSet = function(){};
 
