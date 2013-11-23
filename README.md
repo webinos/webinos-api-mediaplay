@@ -6,13 +6,13 @@ webinos mediaplay api provides the interface to remotely control uPnP devices.
 
 ## Installation ##
 
-To install the device discovery API you will need to npm the node module inside the webinos pzp and your pzh.
+To install the device discovery API you will need to npm the node module inside the webinos pzp.
 
 For end users, you can simply open a command prompt in the root of your webinos-pzp and do: 
 
 	npm install https://github.com/webinos/webinos-api-mediaplay.git
 
-For developers that want to tweak the API, you should fork this repository and clone your fork inside the node_module of your pzp and your pzh.
+For developers that want to tweak the API, you should fork this repository and clone your fork inside the node_module of your pzp.
 
 	cd node_modules
 	git clone https://github.com/<your GitHub account>/webinos-api-mediaplay.git
