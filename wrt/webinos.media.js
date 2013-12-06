@@ -21,7 +21,11 @@
     Media = function(obj) {
         WebinosService.call(this, obj);
     };
-
+    // Inherit all functions from WebinosService
+    Media.prototype = Object.create(WebinosService.prototype);
+    // The following allows the 'instanceof' to work properly
+    Media.prototype.constructor = Media;
+    // Register to the service discovery
     _webinos.registerServiceConstructor("http://webinos.org/api/mediaplay", Media);
 
     Media.prototype.bindService = function (bindCB, serviceId) {
