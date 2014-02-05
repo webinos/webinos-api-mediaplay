@@ -1,4 +1,6 @@
 {
   "name": "mediaplay",
-  "params": {}
+  "params": {
+    "useUPnP": true
+  }
 }
