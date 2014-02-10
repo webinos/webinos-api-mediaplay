@@ -43,7 +43,30 @@
             $('#bind').bind('click', function () {
                 recentService = services[$('#getMediaServices option:selected').val()];
                 recentService.bindService({onBind:function (service) {
-                    logMessage('MediaPlay API ' + service.api + ' bound.');
+                    logMessage('MediaPlay API ' + service.id + ' bound.');
+
+                    // listen for playback events
+                    service.addListener({
+                        onStop: function() {
+                            logMessage('stop event for service ' + service.id);
+                        },
+                        onEnd: function() {
+                            logMessage('end event for service ' + service.id);
+                        },
+                        onPlay: function() {
+                            logMessage('play event for service ' + service.id);
+                        },
+                        onPause: function() {
+                            logMessage('pause event for service ' + service.id);
+                        },
+                        onVolume: function() {
+                            logMessage('volume event for service ' + service.id);
+                        }
+                    }, function() {
+                        logMessage('listener added for service ' + service.id);
+                    }, function() {
+                        logMessage('error: ' + error.code + " " + error.message);
+                    });
                 }});
             });
             $('#play').bind('click', function () {
@@ -112,41 +135,42 @@
 <body>
 <table>
     <tr>
-        <td>Use "Find Services" to search for available MediaPlay API services<br/>
+        <td colspan="3">Use "Find Services" to search for available MediaPlay API services<br/>
             Select one, then bind and use. Select another and bind again and use.
         </td>
     </tr>
     <tr>
-        <td>
+        <td colspan="3">
             <button id="findService" class="button">Find Services</button>
             <br/>
             <select id="getMediaServices"></select>
         </td>
     </tr>
     <tr>
-        <td><p>
+        <td colspan="3"><p>
             <i> The selected address means the Service at that address
                 will be used.</i>
         </p></td>
     </tr>
     <tr>
-        <td>
+        <td colspan="3">
             <button id="bind" class="button">Bind</button>
         </td>
     </tr>
-</table>
-<table>
-    Insert path to movie:
+    <tr>
+        <td colspan="3"><p>
+            Insert path to movie:
+        </p></td>
+    </tr>
     <br/>
     <tr>
-        <td>
+        <td colspan="2">
             <input type="text" id="path"><br>
         </td>
         <td>
             <button id="play" class="button">PLAY</button>
         </td>
     </tr>
-<table>
     <tr>
         <td>
             <button id="stepback" class="button">&#60;&#60;</button>
@@ -158,24 +182,26 @@
             <button id="stepforward" class="button">&#62;&#62;</button>
         </td>
     </tr>
-</table>
     <tr>
-        <td>
+        <td colspan="3">
             <button id="stop" class="button">STOP</button>
         </td>
     </tr>
-</table>
-<table>
     <tr>
-        <td>
+        <td colspan="3">
             <button id="volumeup" class="button">V+</button>
         </td>
     </tr>
     <tr>
-        <td>
+        <td colspan="3">
             <button id="volumedown" class="button">V-</button>
         </td>
     </tr>
+    <tr>
+        <td colspan="3"><ul id="message">
+        </ul></td>
+    </tr>
 </table>
+
 </body>
 </html>
